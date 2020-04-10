@@ -176,19 +176,18 @@ private extension StoriesViewController {
 extension StoriesViewController: AlertDelegate {
     
     func didReceive(error: Error?) {
-        guard let unwrappedError = error else { return }
+        guard let error = error else { return }
         
-        let description = unwrappedError.localizedDescription
-        var startIndex = description.debugDescription.firstIndex(of: "\"")
-        startIndex = description.debugDescription.index(startIndex!, offsetBy: 1)
-        let lastIndex = description.debugDescription.lastIndex(of: "\"")
+        let description = error.localizedDescription
+        guard
+            let firstIndex = description.debugDescription.firstIndex(of: "\""),
+            let lastIndex = description.debugDescription.lastIndex(of: "\"")
+            else { return }
+        let startIndex = description.debugDescription.index(firstIndex, offsetBy: 1)
         
-        let errorMessage = String(description.debugDescription[startIndex!..<lastIndex!])
-        
-        let errorAlert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: UIAlertController.Style.alert)
-        
-        let alertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil)
-        errorAlert.addAction(alertAction)
+        let message = String(description.debugDescription[startIndex..<lastIndex])
+        let errorAlert = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertController.Style.alert)
+        errorAlert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil))
         
         DispatchQueue.main.async {
             self.present(errorAlert, animated: true, completion: { self.stopRefreshingUI() })
