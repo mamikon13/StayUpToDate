@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StoriesViewController" customModule="Stay_up_to_date" customModuleProvider="target">
+            <connections>
+                <outlet property="segmentedControl" destination="zM1-bJ-xvb" id="FHT-Px-a1j"/>
+                <outlet property="tableView" destination="Cq1-X9-VJz" id="XQh-B7-Pse"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Cq1-X9-VJz">
+                    <rect key="frame" x="0.0" y="63" width="375" height="604"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                </tableView>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="zM1-bJ-xvb">
+                    <rect key="frame" x="70" y="16" width="235" height="32"/>
+                    <segments>
+                        <segment title="Top"/>
+                        <segment title="News"/>
+                        <segment title="Best"/>
+                    </segments>
+                    <connections>
+                        <action selector="segmentedControlValueChanged:" destination="-1" eventType="valueChanged" id="hDt-iL-4RQ"/>
+                    </connections>
+                </segmentedControl>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="Cq1-X9-VJz" firstAttribute="top" secondItem="zM1-bJ-xvb" secondAttribute="bottom" constant="16" id="05a-1E-RSe"/>
+                <constraint firstItem="zM1-bJ-xvb" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="70" id="ETT-z9-e72"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Cq1-X9-VJz" secondAttribute="trailing" id="Hjv-rv-Aru"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="zM1-bJ-xvb" secondAttribute="trailing" constant="70" id="dtq-x8-Ap6"/>
+                <constraint firstItem="zM1-bJ-xvb" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="myD-YA-gQs"/>
+                <constraint firstItem="Cq1-X9-VJz" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="nZA-IS-ofX"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Cq1-X9-VJz" secondAttribute="bottom" id="zca-hV-e0h"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="136.80000000000001" y="144.3778110944528"/>
+        </view>
+    </objects>
+</document>
