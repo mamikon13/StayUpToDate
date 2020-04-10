@@ -214,7 +214,7 @@ extension StoriesViewController: UITableViewDelegate {
 }
 
 
-// MARK: - Fetchable Delegate
+// MARK: - FetchableDelegate
 
 extension StoriesViewController: Fetchable {
     
