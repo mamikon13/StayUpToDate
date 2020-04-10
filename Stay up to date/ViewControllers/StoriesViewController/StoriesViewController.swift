@@ -176,16 +176,14 @@ private extension StoriesViewController {
 extension StoriesViewController: AlertDelegate {
     
     func didReceive(error: Error?) {
-        guard let error = error else { return }
-        
-        let description = error.localizedDescription
         guard
-            let firstIndex = description.debugDescription.firstIndex(of: "\""),
-            let lastIndex = description.debugDescription.lastIndex(of: "\"")
+            let description = error?.localizedDescription.debugDescription,
+            let firstIndex = description.firstIndex(of: "\""),
+            let lastIndex = description.lastIndex(of: "\"")
             else { return }
-        let startIndex = description.debugDescription.index(firstIndex, offsetBy: 1)
         
-        let message = String(description.debugDescription[startIndex..<lastIndex])
+        let startIndex = description.index(firstIndex, offsetBy: 1)
+        let message = String(description[startIndex..<lastIndex])
         let errorAlert = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertController.Style.alert)
         errorAlert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil))
         
