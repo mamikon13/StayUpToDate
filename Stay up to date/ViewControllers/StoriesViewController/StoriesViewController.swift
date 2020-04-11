@@ -81,10 +81,6 @@ private extension StoriesViewController {
                     return
             }
             
-//            self.currentIDs = newIDs
-//            self.dataTasks.forEach { $0.cancel() }
-//            self.dataTasks = []
-            
             DispatchQueue.main.async {
                 self.currentIDs = newIDs
                 self.dataTasks.forEach { $0.cancel() }
@@ -236,12 +232,10 @@ extension StoriesViewController: Fetchable {
             
             self.dataSource.objects[index] = story
             DispatchQueue.main.async {
-//                self.tableView.beginUpdates()
                 let indexPath = IndexPath(row: index, section: 0)
                 if self.tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
                     self.tableView.reloadRows(at: [indexPath], with: .fade)
                 }
-//                self.tableView.endUpdates()
             }
         }
         
