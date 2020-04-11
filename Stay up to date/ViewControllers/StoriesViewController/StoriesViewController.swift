@@ -10,7 +10,7 @@ import UIKit
 import SafariServices
 
 
-class StoriesViewController: UIViewController, BaseViewController {
+final class StoriesViewController: UIViewController, BaseViewController {
     
     private var activityIndicator: UIActivityIndicatorView = {
         if #available(iOS 13.0, *) {

@@ -19,6 +19,8 @@ protocol BaseTableViewCell: UITableViewCell {
     
     func setupCell(with object: Element)
     
+    func resetCell()
+    
 }
 
 
@@ -31,5 +33,7 @@ extension BaseTableViewCell {
     static var identifier: String {
         return String(describing: self)
     }
+    
+    func resetCell() { }
     
 }

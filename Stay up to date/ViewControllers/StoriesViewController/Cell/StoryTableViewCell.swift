@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StoryTableViewCell: UITableViewCell, BaseTableViewCell {
+final class StoryTableViewCell: UITableViewCell, BaseTableViewCell {
     
     typealias Element = Story
     
@@ -29,9 +29,7 @@ class StoryTableViewCell: UITableViewCell, BaseTableViewCell {
         }
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
+    func resetCell() {
         title.text = "Loading..."
         author.text = "Loading..."
         time.text = "•••"

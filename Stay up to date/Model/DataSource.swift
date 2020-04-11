@@ -9,7 +9,7 @@
 import UIKit
 
 
-class DataSource<T: Decodable, P: BaseTableViewCell>: NSObject, UITableViewDataSource, UITableViewDataSourcePrefetching {
+final class DataSource<T: Decodable, P: BaseTableViewCell>: NSObject, UITableViewDataSource, UITableViewDataSourcePrefetching {
     
     var objects = [T?]()
     
@@ -35,6 +35,7 @@ class DataSource<T: Decodable, P: BaseTableViewCell>: NSObject, UITableViewDataS
         if let object = objects[indexPath.row] as? P.Element {
             cell.setupCell(with: object)
         } else {
+            cell.resetCell()
             fetchDelegate?.executeFetch(by: indexPath.row) { [alertDelegate] error in
                 if let error = error, !error.localizedDescription.contains("cancelled") {
                     alertDelegate?.didReceive(error: error)
