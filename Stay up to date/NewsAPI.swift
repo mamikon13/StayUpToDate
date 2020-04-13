@@ -14,14 +14,11 @@ typealias ApiCallback<T:Decodable> = (_ data: T?, _ error: Error?) -> Void
 
 final class NewsAPI {
     
-    private static var newsAPI : NewsAPI = {
-        let api = NewsAPI()
-        return api
-    }()
+    static let shared = NewsAPI()
     
-    class func shared() -> NewsAPI {
-        return newsAPI
-    }
+    
+    private init() { }
+    
     
     func fetch<T: Decodable>(for request: Request, callback: @escaping ApiCallback<T>) -> URLSessionDataTask {
         

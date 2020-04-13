@@ -70,7 +70,7 @@ private extension StoriesViewController {
     func reloadStoryIDs(by index: Int) {
         guard let type = SourceType(by: index) else { return }
         
-        NewsAPI.shared().storyIDs(from: type) { [weak self] ids, error in
+        NewsAPI.shared.storyIDs(from: type) { [weak self] ids, error in
             guard let self = self else { return }
             guard
                 let newIDs = ids,
@@ -222,7 +222,7 @@ extension StoriesViewController: Fetchable {
         // it means we already loaded it previously / currently loading it and we have to stop it
         guard !dataTasks.contains(where: { $0.originalRequest?.url == Request(type: .story(storyID)).absolutURL }) else { return }
         
-        let dataTask: URLSessionDataTask = NewsAPI.shared().story(id: storyID) { [weak self] story, error in
+        let dataTask: URLSessionDataTask = NewsAPI.shared.story(id: storyID) { [weak self] story, error in
             
             handler(error)
             guard
