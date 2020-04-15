@@ -22,11 +22,11 @@ final class StoriesViewController: UIViewController, BaseViewController {
     
     // MARK: - IBOutlets
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet private weak var tableView: UITableView!
     
-    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    @IBOutlet private weak var segmentedControl: UISegmentedControl!
     
-    @IBAction func segmentedControlValueChanged(_ sender: UISegmentedControl) {
+    @IBAction private func segmentedControlValueChanged(_ sender: UISegmentedControl) {
         reloadStoryIDs(by: sender.selectedSegmentIndex)
     }
     
@@ -99,7 +99,7 @@ private extension StoriesViewController {
     }
     
     func setupTableView() {
-        dataSource = DataSource(objects: [Story?](repeating: nil, count: currentIDs.count), fetchDelegate: self, alertDelegate: self)
+        dataSource = .init(objects: [Story?](repeating: nil, count: currentIDs.count), fetchDelegate: self, alertDelegate: self)
         tableView.register(StoryTableViewCell.nib, forCellReuseIdentifier: StoryTableViewCell.identifier)
         
         tableView.rowHeight = UITableView.automaticDimension
