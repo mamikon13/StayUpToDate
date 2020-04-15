@@ -12,11 +12,11 @@ final class StoryTableViewCell: UITableViewCell, BaseTableViewCell {
     
     typealias Element = Story
     
-    @IBOutlet weak var title: UILabel!
-    @IBOutlet weak var author: UILabel!
-    @IBOutlet weak var time: UILabel!
-    @IBOutlet weak var shortURL: UILabel!
-    @IBOutlet weak var byLabel: UILabel!
+    @IBOutlet private weak var title: UILabel!
+    @IBOutlet private weak var author: UILabel!
+    @IBOutlet private weak var time: UILabel!
+    @IBOutlet private weak var shortURL: UILabel!
+    @IBOutlet private weak var byLabel: UILabel!
     
     func setupCell(with story: Story) {
         title.text = story.title
