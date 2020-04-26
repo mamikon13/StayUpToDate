@@ -21,9 +21,10 @@ final class NewsDAL {
     
     // MARK: internal stuff
 
-    /**
-     All items of type T for current language
-     */
+    /// All objects of given type in DataBase
+    ///
+    /// - Parameters:
+    ///   - ttype: The type of receiving objects.
     static func get<T: NSManagedObject>(_ ttype: T.Type) -> [T] {
         var result = [T]()
         let semaphore = DispatchSemaphore(value: 0)
@@ -43,27 +44,8 @@ final class NewsDAL {
         _ = semaphore.wait(wallTimeout: .distantFuture)
         return result
     }
-    
-    static func getOrCreateSingle<T: NSManagedObject>(_ ttype: T.Type) -> T? {
-        var item: T?
-        
-        item = self.get(T.self).first
-        if item != nil {
-            return item
-        }
-        
-        if let item = self.shared.createManaged(T.self) {
-            return item
-        } else {
-            return nil
-        }
-    }
 
-    func getEntity(className: String) -> NSEntityDescription? {
-        return NSEntityDescription.entity(forEntityName: className, in: managedObjectContext)
-    }
-
-    func createManaged<T: NSManagedObject>(_ ttype: T.Type) -> T? {
+    func createManaged<T: NSManagedObject>(_ ttype: T.Type) -> T {
         return T(context: managedObjectContext)
     }
     

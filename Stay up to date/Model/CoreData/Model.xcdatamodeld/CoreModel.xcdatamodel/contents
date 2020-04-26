@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19D76" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="StoryDAO" representedClassName="StoryDAO" syncable="YES">
-        <attribute name="author" optional="YES" attributeType="String"/>
-        <attribute name="time" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="title" optional="YES" attributeType="String"/>
-        <attribute name="url" optional="YES" attributeType="URI"/>
-        <relationship name="id" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="StoryID" inverseName="storyDAO" inverseEntity="StoryID"/>
-    </entity>
-    <entity name="StoryID" representedClassName="StoryID" syncable="YES">
-        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+    <entity name="EntityID" representedClassName="EntityID" syncable="YES">
+        <attribute name="selfID" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="best" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="StoryIDs" inverseName="best" inverseEntity="StoryIDs"/>
         <relationship name="new" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="StoryIDs" inverseName="new" inverseEntity="StoryIDs"/>
         <relationship name="storyDAO" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="StoryDAO" inverseName="id" inverseEntity="StoryDAO"/>
         <relationship name="top" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="StoryIDs" inverseName="top" inverseEntity="StoryIDs"/>
     </entity>
+    <entity name="StoryDAO" representedClassName="StoryDAO" syncable="YES">
+        <attribute name="author" optional="YES" attributeType="String"/>
+        <attribute name="time" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="url" optional="YES" attributeType="URI"/>
+        <relationship name="id" maxCount="1" deletionRule="Cascade" destinationEntity="EntityID" inverseName="storyDAO" inverseEntity="EntityID"/>
+    </entity>
     <entity name="StoryIDs" representedClassName="StoryIDs" syncable="YES">
-        <relationship name="best" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="StoryID" inverseName="best" inverseEntity="StoryID"/>
-        <relationship name="new" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="StoryID" inverseName="new" inverseEntity="StoryID"/>
-        <relationship name="top" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="StoryID" inverseName="top" inverseEntity="StoryID"/>
+        <relationship name="best" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="EntityID" inverseName="best" inverseEntity="EntityID"/>
+        <relationship name="new" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="EntityID" inverseName="new" inverseEntity="EntityID"/>
+        <relationship name="top" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="EntityID" inverseName="top" inverseEntity="EntityID"/>
     </entity>
     <elements>
         <element name="StoryDAO" positionX="-63" positionY="-18" width="128" height="118"/>
+        <element name="EntityID" positionX="-54" positionY="9" width="128" height="118"/>
         <element name="StoryIDs" positionX="-54" positionY="-9" width="128" height="88"/>
-        <element name="StoryID" positionX="-54" positionY="9" width="128" height="118"/>
     </elements>
 </model>

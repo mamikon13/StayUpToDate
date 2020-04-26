@@ -13,6 +13,7 @@ protocol ManagedObjectConvertible {
     
     associatedtype ManagedObject: EntityConvertible
     
-    func toManagedObject() -> ManagedObject?
+    /// Creates a NSManagedObject from the current Entity.
+    func toManagedObject() -> ManagedObject
     
 }

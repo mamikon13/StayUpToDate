@@ -13,6 +13,7 @@ protocol EntityConvertible {
     
     associatedtype Entity
     
+    /// Creates an Entity from the current NSManagedObject.
     func toEntity() -> Entity?
     
 }

@@ -12,18 +12,25 @@ import CoreData
 
 @objc(Story)
 public class StoryDAO: NSManagedObject {
-
-    class func getStoryDAO() -> StoryDAO? {
-        return NewsDAL.getOrCreateSingle(self)
-    }
+    
+    class func getOrCreateSingle(with id: Int64) -> StoryDAO {
+        if let item = NewsDAL.get(self).first(where: { $0.id.selfID == id }) {
+            return item
+        }
         
+        let entityID = EntityID.getOrCreateSingle(with: id)
+        let item = NewsDAL.shared.createManaged(self)
+        item.id = entityID
+        return item
+    }
+    
 }
 
 
 extension StoryDAO: EntityConvertible {
     
     func toEntity() -> Story? {
-        return Story(id: id!.id, title: title, author: author, time: time, url: url)
+        return Story(id: id.selfID, title: title, author: author, time: time, url: url)
     }
     
 }

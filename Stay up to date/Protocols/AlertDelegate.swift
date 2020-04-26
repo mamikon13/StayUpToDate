@@ -10,5 +10,7 @@ import Foundation
 
 
 protocol AlertDelegate: class {
+    
+    /// Captures an Errror by the given error.
     func didReceive(error: Error?)
 }

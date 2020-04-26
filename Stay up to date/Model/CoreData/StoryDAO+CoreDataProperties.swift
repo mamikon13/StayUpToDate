@@ -1,5 +1,5 @@
 //
-//  Story+CoreDataProperties.swift
+//  StoryDAO+CoreDataProperties.swift
 //  Stay up to date
 //
 //  Created by Mamikon Nikogosyan on 25.04.2020.
@@ -21,6 +21,6 @@ extension StoryDAO {
     @NSManaged public var time: Date?
     @NSManaged public var title: String?
     @NSManaged public var url: URL?
-    @NSManaged public var id: StoryID?
+    @NSManaged public var id: EntityID
     
 }

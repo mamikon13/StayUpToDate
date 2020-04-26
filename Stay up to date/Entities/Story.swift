@@ -83,19 +83,14 @@ extension Story: Decodable {
 
 extension Story: ManagedObjectConvertible {
 
-    func toManagedObject() -> StoryDAO? {
-        guard
-            let story = NewsDAL.getOrCreateSingle(StoryDAO.self),
-            let storyID = NewsDAL.getOrCreateSingle(StoryID.self)
-            else { return nil }
+    func toManagedObject() -> StoryDAO {
+        let storyDAO = StoryDAO.getOrCreateSingle(with: id)
+        storyDAO.title = title
+        storyDAO.author = author
+        storyDAO.time = time
+        storyDAO.url = url
         
-        story.id = storyID
-        story.title = title
-        story.author = author
-        story.time = time
-        story.url = url
-        
-        return story
+        return storyDAO
     }
 
 }

@@ -27,10 +27,10 @@ extension StoryIDs {
 extension StoryIDs {
 
     @objc(addBestObject:)
-    @NSManaged public func addToBest(_ value: StoryID)
+    @NSManaged public func addToBest(_ value: EntityID)
 
     @objc(removeBestObject:)
-    @NSManaged public func removeFromBest(_ value: StoryID)
+    @NSManaged public func removeFromBest(_ value: EntityID)
 
     @objc(addBest:)
     @NSManaged public func addToBest(_ values: NSSet)
@@ -44,10 +44,10 @@ extension StoryIDs {
 extension StoryIDs {
 
     @objc(addNewObject:)
-    @NSManaged public func addToNew(_ value: StoryID)
+    @NSManaged public func addToNew(_ value: EntityID)
 
     @objc(removeNewObject:)
-    @NSManaged public func removeFromNew(_ value: StoryID)
+    @NSManaged public func removeFromNew(_ value: EntityID)
 
     @objc(addNew:)
     @NSManaged public func addToNew(_ values: NSSet)
@@ -61,10 +61,10 @@ extension StoryIDs {
 extension StoryIDs {
 
     @objc(addTopObject:)
-    @NSManaged public func addToTop(_ value: StoryID)
+    @NSManaged public func addToTop(_ value: EntityID)
 
     @objc(removeTopObject:)
-    @NSManaged public func removeFromTop(_ value: StoryID)
+    @NSManaged public func removeFromTop(_ value: EntityID)
 
     @objc(addTop:)
     @NSManaged public func addToTop(_ values: NSSet)
