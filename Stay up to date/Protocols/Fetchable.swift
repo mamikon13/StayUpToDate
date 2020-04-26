@@ -16,6 +16,7 @@ protocol FetchExecutable: class {
     
     /// Executes a fetch by the given index.
     func executeFetch(by index: Int, handler: @escaping (Error?) -> ())
+
 }
 
 
@@ -23,4 +24,5 @@ protocol FetchCancellable: class {
     
     /// Cancels a fetch by the given index.
     func cancelFetch(by index: Int)
+
 }

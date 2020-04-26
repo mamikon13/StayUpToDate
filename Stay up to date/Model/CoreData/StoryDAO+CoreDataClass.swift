@@ -29,7 +29,7 @@ public class StoryDAO: NSManagedObject {
 
 extension StoryDAO: EntityConvertible {
     
-    func toEntity() -> Story? {
+    func toEntity() -> Story {
         return Story(id: id.selfID, title: title, author: author, time: time, url: url)
     }
     

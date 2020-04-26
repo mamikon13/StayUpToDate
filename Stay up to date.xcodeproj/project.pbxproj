@@ -127,18 +127,25 @@
 				C7D567DF2440974D00423D59 /* ViewControllers */,
 				C7D567DE2440974800423D59 /* Model */,
 				C7D567DD2440974000423D59 /* Protocols */,
-				C7D567DC2440973300423D59 /* Entities */,
 				C7D567DB2440972000423D59 /* Extensions */,
 			);
 			path = "Stay up to date";
 			sourceTree = "<group>";
 		};
-		C7D567DB2440972000423D59 /* Extensions */ = {
+		C750148D24563D8300607C9C /* Base */ = {
 			isa = PBXGroup;
 			children = (
 				C7D567F62440980D00423D59 /* StringExt.swift */,
 				C73553272454D0B3006EF736 /* CodingUserInfoKeyExt.swift */,
 				C73553292454F718006EF736 /* NSObjectExt.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		C7D567DB2440972000423D59 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C750148D24563D8300607C9C /* Base */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -167,8 +174,9 @@
 		C7D567DE2440974800423D59 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C735531824538B03006EF736 /* CoreData */,
 				C7D567EA244097DD00423D59 /* DataSource.swift */,
+				C7D567DC2440973300423D59 /* Entities */,
+				C735531824538B03006EF736 /* CoreData */,
 			);
 			path = Model;
 			sourceTree = "<group>";
