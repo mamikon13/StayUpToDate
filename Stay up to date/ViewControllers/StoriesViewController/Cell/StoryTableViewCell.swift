@@ -20,11 +20,11 @@ final class StoryTableViewCell: UITableViewCell, BaseTableViewCell {
     
     func setupCell(with story: Story) {
         title.text = story.title
-        author.text = story.by
+        author.text = story.author
         time.text = String(date: story.time, format: "HH:mm")
         shortURL.text = story.url?.host
         
-        if story.by == nil {
+        if story.author == nil {
             byLabel.isHidden = true
         }
     }

@@ -41,13 +41,13 @@ enum StoryType {
 
 
 struct Story {
-    
-    let id: Int
+
+    let id: Int64
     let title: String?
-    let by: String?
+    let author: String?
     let time: Date?
     let url: URL?
-    
+
     private(set) var type: StoryType?
     private var storyType: String? {
         willSet {
@@ -55,18 +55,47 @@ struct Story {
         }
     }
     
+    public init(id: Int64, title: String?, author: String?, time: Date?, url: URL?, storyType: String? = nil) {
+        self.id = id
+        self.title = title
+        self.author = author
+        self.time = time
+        self.url = url
+        self.storyType = storyType
+    }
+
 }
 
 
 extension Story: Decodable {
-    
+
     private enum CodingKeys: String, CodingKey {
         case id
         case title
-        case by
+        case author = "by"
         case time
         case url
         case storyType = "type"
     }
-    
+
+}
+
+
+extension Story: ManagedObjectConvertible {
+
+    func toManagedObject() -> StoryDAO? {
+        guard
+            let story = NewsDAL.getOrCreateSingle(StoryDAO.self),
+            let storyID = NewsDAL.getOrCreateSingle(StoryID.self)
+            else { return nil }
+        
+        story.id = storyID
+        story.title = title
+        story.author = author
+        story.time = time
+        story.url = url
+        
+        return story
+    }
+
 }
