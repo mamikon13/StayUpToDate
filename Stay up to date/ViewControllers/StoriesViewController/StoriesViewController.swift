@@ -72,28 +72,33 @@ private extension StoriesViewController {
         
         NewsAPI.shared.storyIDs(from: type) { [weak self] ids, error in
             guard let self = self else { return }
+            let databaseIDs = StoryIDs.getOrCreateSingle()
             guard
-                let newIDs = ids,
-                self.currentIDs.count == 0 || newIDs.first != self.currentIDs.first
+                let serverIDs = ids,
+                let currentIDs = databaseIDs.getStoryIDs(with: type),
+                currentIDs.count == 0 || serverIDs.first != currentIDs.first?.selfID
+//                self.currentIDs.count == 0 || serverIDs.first != self.currentIDs.first
                 else {
                     self.stopRefreshingUI()
                     self.didReceive(error: error)
                     return
             }
             
+            databaseIDs.addStoryIDs(storyIDs: serverIDs, with: type)
+//            let newIDs = databaseIDs.getStoryIDs(with: type)?.map { $0.selfID } ?? []
+            
             DispatchQueue.main.async {
-                self.currentIDs = newIDs
+                self.currentIDs = Array(serverIDs)
                 self.dataTasks.forEach { $0.cancel() }
                 self.dataTasks = []
                 
                 if let dataSource = self.dataSource {
-                    dataSource.objects = [Story?](repeating: nil, count: newIDs.count)
-                    self.stopRefreshingUI()
+                    dataSource.objects = [Story?](repeating: nil, count: serverIDs.count)
                     self.tableView.reloadData()
                 } else {
-                    self.stopRefreshingUI()
                     self.setupTableView()
                 }
+                self.stopRefreshingUI()
             }
         }
     }

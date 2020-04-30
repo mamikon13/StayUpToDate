@@ -27,9 +27,9 @@ final class NewsDAL {
     ///   - ttype: The type of receiving objects.
     static func get<T: NSManagedObject>(_ ttype: T.Type) -> [T] {
         var result = [T]()
-        let semaphore = DispatchSemaphore(value: 0)
-        
-        DispatchQueue.global().async {
+//        let semaphore = DispatchSemaphore(value: 0)
+//
+//        DispatchQueue.global().async {
             self.shared.managedObjectContext.performAndWait {
                 do {
                     let fetchRequest: NSFetchRequest<T> = NSFetchRequest<T>(entityName: ttype.description())
@@ -38,10 +38,10 @@ final class NewsDAL {
                     fatalError("Fetch task failed")
                 }
             }
-            semaphore.signal()
-        }
-        
-        _ = semaphore.wait(wallTimeout: .distantFuture)
+//            semaphore.signal()
+//        }
+//
+//        _ = semaphore.wait(wallTimeout: .distantFuture)
         return result
     }
 
@@ -51,6 +51,18 @@ final class NewsDAL {
     
     
     // MARK: - Core Data stack
+    
+//    private lazy var backgroundContext: NSManagedObjectContext = {
+//        return self.privateManagedObjectContext
+//    }()
+//
+//    private lazy var context: NSManagedObjectContext = {
+//        return persistentContainer.viewContext
+//    }()
+//
+//    lazy var currentContext = {
+//        return Thread.current.isMainThread ? context : backgroundContext
+//    }()
     
     var managedObjectContext: NSManagedObjectContext {
         return persistentContainer.viewContext
@@ -83,10 +95,18 @@ final class NewsDAL {
         return container
     }()
     
+//    private lazy var privateManagedObjectContext: NSManagedObjectContext = {
+//        // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.) This property is optional since there are legitimate error conditions that could cause the creation of the context to fail.
+//        let managedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+//        managedObjectContext.persistentStoreCoordinator = self.persistentStoreCoordinator
+//        //managedObjectContext.parent = context
+//        return managedObjectContext
+//    }()
+    
     
     // MARK: - Core Data Saving support
     
-    func saveContext () {
+    func saveContext() {
         let context = persistentContainer.viewContext
         if context.hasChanges {
             do {

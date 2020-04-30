@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19D76" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="EntityID" representedClassName="EntityID" syncable="YES">
-        <attribute name="selfID" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="selfID" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" customClassName="Int"/>
         <relationship name="best" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="StoryIDs" inverseName="best" inverseEntity="StoryIDs"/>
         <relationship name="new" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="StoryIDs" inverseName="new" inverseEntity="StoryIDs"/>
         <relationship name="storyDAO" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="StoryDAO" inverseName="id" inverseEntity="StoryDAO"/>
@@ -15,13 +15,13 @@
         <relationship name="id" maxCount="1" deletionRule="Cascade" destinationEntity="EntityID" inverseName="storyDAO" inverseEntity="EntityID"/>
     </entity>
     <entity name="StoryIDs" representedClassName="StoryIDs" syncable="YES">
-        <relationship name="best" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="EntityID" inverseName="best" inverseEntity="EntityID"/>
-        <relationship name="new" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="EntityID" inverseName="new" inverseEntity="EntityID"/>
-        <relationship name="top" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="EntityID" inverseName="top" inverseEntity="EntityID"/>
+        <relationship name="best" toMany="YES" deletionRule="Cascade" destinationEntity="EntityID" inverseName="best" inverseEntity="EntityID"/>
+        <relationship name="new" toMany="YES" deletionRule="Cascade" destinationEntity="EntityID" inverseName="new" inverseEntity="EntityID"/>
+        <relationship name="top" toMany="YES" deletionRule="Cascade" destinationEntity="EntityID" inverseName="top" inverseEntity="EntityID"/>
     </entity>
     <elements>
-        <element name="StoryDAO" positionX="-63" positionY="-18" width="128" height="118"/>
         <element name="EntityID" positionX="-54" positionY="9" width="128" height="118"/>
+        <element name="StoryDAO" positionX="-63" positionY="-18" width="128" height="118"/>
         <element name="StoryIDs" positionX="-54" positionY="-9" width="128" height="88"/>
     </elements>
 </model>

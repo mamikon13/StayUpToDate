@@ -16,11 +16,11 @@ extension StoryDAO {
     @nonobjc public class func fetchRequest() -> NSFetchRequest<StoryDAO> {
         return NSFetchRequest<StoryDAO>(entityName: StoryDAO.description())
     }
-
+    
+    @NSManaged public var id: EntityID
     @NSManaged public var author: String?
     @NSManaged public var time: Date?
     @NSManaged public var title: String?
     @NSManaged public var url: URL?
-    @NSManaged public var id: EntityID
     
 }

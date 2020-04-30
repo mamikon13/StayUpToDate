@@ -17,7 +17,7 @@ extension EntityID {
         return NSFetchRequest<EntityID>(entityName: EntityID.description())
     }
 
-    @NSManaged public var selfID: Int64
+    @NSManaged public var selfID: Int
     @NSManaged public var storyDAO: StoryDAO?
 
 }

@@ -16,6 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        print("*************", NewsDAL.shared.persistentContainer.persistentStoreDescriptions)
+        
         guard #available(iOS 13.0, *) else {
             let vc = StoriesViewController()
             let navigationController = UINavigationController(rootViewController: vc)

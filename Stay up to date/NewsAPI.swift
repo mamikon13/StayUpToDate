@@ -60,7 +60,7 @@ final class NewsAPI {
 
 extension NewsAPI {
     
-    func storyIDs(from sourceType: SourceType, callback: @escaping ApiCallback<[Int]>) {
+    func storyIDs(from sourceType: SourceType, callback: @escaping ApiCallback<Set<Int>>) {
         _ = fetch(for: Request(type: sourceType)) { storyIDs, error in
             callback(storyIDs, error)
         }

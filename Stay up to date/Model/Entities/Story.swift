@@ -42,7 +42,7 @@ enum StoryType {
 
 struct Story {
 
-    let id: Int64
+    let id: Int
     let title: String?
     let author: String?
     let time: Date?
@@ -55,7 +55,7 @@ struct Story {
         }
     }
     
-    public init(id: Int64, title: String?, author: String?, time: Date?, url: URL?, storyType: String? = nil) {
+    public init(id: Int, title: String?, author: String?, time: Date?, url: URL?, storyType: String? = nil) {
         self.id = id
         self.title = title
         self.author = author

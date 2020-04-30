@@ -10,10 +10,10 @@
 import Foundation
 import CoreData
 
-@objc(Story)
+@objc(StoryDAO)
 public class StoryDAO: NSManagedObject {
     
-    class func getOrCreateSingle(with id: Int64) -> StoryDAO {
+    class func getOrCreateSingle(with id: Int) -> StoryDAO {
         if let item = NewsDAL.get(self).first(where: { $0.id.selfID == id }) {
             return item
         }

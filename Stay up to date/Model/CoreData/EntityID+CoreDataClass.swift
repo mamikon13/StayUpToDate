@@ -10,10 +10,10 @@
 import Foundation
 import CoreData
 
-@objc(StoryID)
+@objc(EntityID)
 public class EntityID: NSManagedObject {
     
-    class func getOrCreateSingle(with id: Int64) -> EntityID {
+    class func getOrCreateSingle(with id: Int) -> EntityID {
         if let item = NewsDAL.get(self).first(where: { $0.selfID == id }) {
             return item
         }

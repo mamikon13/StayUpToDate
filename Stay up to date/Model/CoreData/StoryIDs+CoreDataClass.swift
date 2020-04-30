@@ -22,19 +22,32 @@ public class StoryIDs: NSManagedObject {
         return item
     }
     
-    func addStoryIDs(storyIDs: [Int64], to type: SourceType) {
-        let array = storyIDs.map { EntityID.getOrCreateSingle(with: $0) }
-        let set = NSSet(object: array)
+    func addStoryIDs(storyIDs: Set<Int>, with type: SourceType) {
+        let arrayIDs = Set(storyIDs.map { EntityID.getOrCreateSingle(with: $0) })
         
         switch type {
         case .newstories:
-            addToNew(set)
+            addToNew(arrayIDs)
         case .topstories:
-            addToTop(set)
+            addToTop(arrayIDs)
         case .beststories:
-            addToBest(set)
+            addToBest(arrayIDs)
         default:
             return
+        }
+        NewsDAL.shared.saveContext()
+    }
+    
+    func getStoryIDs(with type: SourceType) -> Set<EntityID>? {
+        switch type {
+        case .newstories:
+            return new
+        case .topstories:
+            return top
+        case .beststories:
+            return best
+        default:
+            return nil
         }
     }
 

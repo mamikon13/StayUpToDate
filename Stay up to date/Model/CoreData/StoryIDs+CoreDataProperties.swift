@@ -17,9 +17,9 @@ extension StoryIDs {
         return NSFetchRequest<StoryIDs>(entityName: StoryIDs.description())
     }
 
-    @NSManaged public var best: NSSet?
-    @NSManaged public var new: NSSet?
-    @NSManaged public var top: NSSet?
+    @NSManaged public var best: Set<EntityID>
+    @NSManaged public var new: Set<EntityID>
+    @NSManaged public var top: Set<EntityID>
 
 }
 
@@ -33,10 +33,10 @@ extension StoryIDs {
     @NSManaged public func removeFromBest(_ value: EntityID)
 
     @objc(addBest:)
-    @NSManaged public func addToBest(_ values: NSSet)
+    @NSManaged public func addToBest(_ values: Set<EntityID>)
 
     @objc(removeBest:)
-    @NSManaged public func removeFromBest(_ values: NSSet)
+    @NSManaged public func removeFromBest(_ values: Set<EntityID>)
 
 }
 
@@ -50,10 +50,10 @@ extension StoryIDs {
     @NSManaged public func removeFromNew(_ value: EntityID)
 
     @objc(addNew:)
-    @NSManaged public func addToNew(_ values: NSSet)
+    @NSManaged public func addToNew(_ values: Set<EntityID>)
 
     @objc(removeNew:)
-    @NSManaged public func removeFromNew(_ values: NSSet)
+    @NSManaged public func removeFromNew(_ values: Set<EntityID>)
 
 }
 
@@ -67,9 +67,9 @@ extension StoryIDs {
     @NSManaged public func removeFromTop(_ value: EntityID)
 
     @objc(addTop:)
-    @NSManaged public func addToTop(_ values: NSSet)
+    @NSManaged public func addToTop(_ values: Set<EntityID>)
 
     @objc(removeTop:)
-    @NSManaged public func removeFromTop(_ values: NSSet)
+    @NSManaged public func removeFromTop(_ values: Set<EntityID>)
 
 }
