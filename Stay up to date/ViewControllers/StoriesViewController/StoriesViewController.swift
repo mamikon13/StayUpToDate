@@ -74,9 +74,9 @@ private extension StoriesViewController {
             guard let self = self else { return }
             let databaseIDs = StoryIDs.getOrCreateSingle()
             guard
-                let serverIDs = ids,
-                let currentIDs = databaseIDs.getStoryIDs(with: type),
-                currentIDs.count == 0 || serverIDs.first != currentIDs.first?.selfID
+                let serverIDs = ids
+//                let currentIDs = databaseIDs.getStoryIDs(with: type),
+//                currentIDs.count == 0 || serverIDs.first != currentIDs.first?.selfID
 //                self.currentIDs.count == 0 || serverIDs.first != self.currentIDs.first
                 else {
                     self.stopRefreshingUI()
@@ -228,7 +228,6 @@ extension StoriesViewController: Fetchable {
         guard !dataTasks.contains(where: { $0.originalRequest?.url == Request(type: .story(storyID)).absolutURL }) else { return }
         
         let dataTask: URLSessionDataTask = NewsAPI.shared.story(id: storyID) { [weak self] story, error in
-            
             handler(error)
             guard
                 let self = self,

@@ -3,12 +3,12 @@
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StoriesViewController" customModule="Stay_up_to_date" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StoriesViewController" customModule="StayUpToDate" customModuleProvider="target">
             <connections>
                 <outlet property="segmentedControl" destination="zM1-bJ-xvb" id="FHT-Px-a1j"/>
                 <outlet property="tableView" destination="Cq1-X9-VJz" id="XQh-B7-Pse"/>
@@ -28,7 +28,7 @@
                     <rect key="frame" x="70" y="16" width="235" height="32"/>
                     <segments>
                         <segment title="Top"/>
-                        <segment title="News"/>
+                        <segment title="New"/>
                         <segment title="Best"/>
                     </segments>
                     <connections>

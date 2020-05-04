@@ -20,7 +20,7 @@ final class NewsAPI {
     private init() { }
     
     
-    func fetch<T: Decodable>(for request: Request, callback: @escaping ApiCallback<T>) -> URLSessionDataTask {
+    private func fetch<T: Decodable>(for request: Request, callback: @escaping ApiCallback<T>) -> URLSessionDataTask {
         
         let url = request.absolutURL
         

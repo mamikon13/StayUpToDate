@@ -27,11 +27,14 @@ public class StoryIDs: NSManagedObject {
         
         switch type {
         case .newstories:
-            addToNew(arrayIDs)
+            new = arrayIDs as NSSet
+//            addToNew(arrayIDs as NSSet)
         case .topstories:
-            addToTop(arrayIDs)
+            top = arrayIDs as NSSet
+//            addToTop(arrayIDs as NSSet)
         case .beststories:
-            addToBest(arrayIDs)
+            best = arrayIDs as NSSet
+//            addToBest(arrayIDs as NSSet)
         default:
             return
         }
@@ -41,11 +44,11 @@ public class StoryIDs: NSManagedObject {
     func getStoryIDs(with type: SourceType) -> Set<EntityID>? {
         switch type {
         case .newstories:
-            return new
+            return new as? Set<EntityID>
         case .topstories:
-            return top
+            return top as? Set<EntityID>
         case .beststories:
-            return best
+            return best as? Set<EntityID>
         default:
             return nil
         }
