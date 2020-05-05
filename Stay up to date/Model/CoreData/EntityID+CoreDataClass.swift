@@ -11,9 +11,12 @@ import Foundation
 import CoreData
 
 @objc(EntityID)
-public class EntityID: NSManagedObject {
+public class EntityID: NSManagedObject { }
+
+
+extension EntityID: ManagedObjectExistable {
     
-    class func getOrCreateSingle(with id: Int) -> EntityID {
+    class func getOrCreateSingle(id: Int) -> EntityID {
         if let item = NewsDAL.get(self).first(where: { $0.selfID == id }) {
             return item
         }

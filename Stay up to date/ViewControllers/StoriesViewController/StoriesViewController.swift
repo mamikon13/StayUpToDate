@@ -32,7 +32,7 @@ final class StoriesViewController: UIViewController, BaseViewController {
     
     // MARK: - Model
     
-    private var dataSource: DataSource<Story, StoryTableViewCell>!
+    private var dataSource: DataSource<Story, StoryDAO, StoryTableViewCell>!
     
     private var currentIDs = [Int]()
     
@@ -85,15 +85,14 @@ private extension StoriesViewController {
             }
             
             databaseIDs.addStoryIDs(storyIDs: serverIDs, with: type)
-//            let newIDs = databaseIDs.getStoryIDs(with: type)?.map { $0.selfID } ?? []
             
             DispatchQueue.main.async {
-                self.currentIDs = Array(serverIDs)
+                self.currentIDs = serverIDs
                 self.dataTasks.forEach { $0.cancel() }
                 self.dataTasks = []
                 
-                if let dataSource = self.dataSource {
-                    dataSource.objects = [Story?](repeating: nil, count: serverIDs.count)
+                if let _ = self.dataSource {
+//                    dataSource.objects = [Story?](repeating: nil, count: serverIDs.count)
                     self.tableView.reloadData()
                 } else {
                     self.setupTableView()
@@ -104,7 +103,7 @@ private extension StoriesViewController {
     }
     
     func setupTableView() {
-        dataSource = .init(objects: [Story?](repeating: nil, count: currentIDs.count), fetchDelegate: self, alertDelegate: self)
+        dataSource = .init(/* objects: [Story?](repeating: nil, count: currentIDs.count), */ fetchDelegate: self, alertDelegate: self)
         tableView.register(StoryTableViewCell.nib, forCellReuseIdentifier: StoryTableViewCell.identifier)
         
         tableView.rowHeight = UITableView.automaticDimension
@@ -159,7 +158,7 @@ private extension StoriesViewController {
     }
     
     func showWarningAlert(for indexPath: IndexPath) {
-        let message = dataSource.objects[indexPath.row] != nil ? "Invalid URL" : "The object hasn't been loaded yet"
+        let message = StoryDAO.getSingle(ordinal: Int16(indexPath.row)) != nil ? "Invalid URL" : "The object hasn't been loaded yet"
         
         let alert = UIAlertController(title: "Ooops!", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
@@ -201,7 +200,7 @@ extension StoriesViewController: AlertDelegate {
 extension StoriesViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let url = dataSource.objects[indexPath.row]?.url else {
+        guard let url = StoryDAO.getSingle(ordinal: Int16(indexPath.row))?.toEntity().url else {
             showWarningAlert(for: indexPath)
             tableView.deselectRow(at: indexPath, animated: true)
             return
@@ -234,7 +233,12 @@ extension StoriesViewController: Fetchable {
                 let story = story
                 else { return }
             
-            self.dataSource.objects[index] = story
+//            self.dataSource.objects[index] = story
+            
+            let storyDAO = story.toManagedObject()
+            storyDAO.ordinal = Int16(index)
+            NewsDAL.shared.saveContext()
+            
             DispatchQueue.main.async {
                 let indexPath = IndexPath(row: index, section: 0)
                 if self.tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {

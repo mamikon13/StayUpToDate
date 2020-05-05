@@ -11,44 +11,49 @@ import Foundation
 import CoreData
 
 @objc(StoryIDs)
-public class StoryIDs: NSManagedObject {
+public class StoryIDs: NSManagedObject { }
+
+
+extension StoryIDs: ManagedObjectExistable {
     
     class func getOrCreateSingle() -> StoryIDs {
         if let item = NewsDAL.get(self).first {
             return item
         }
-        
+
         let item = NewsDAL.shared.createManaged(self)
         return item
     }
     
-    func addStoryIDs(storyIDs: Set<Int>, with type: SourceType) {
-        let arrayIDs = Set(storyIDs.map { EntityID.getOrCreateSingle(with: $0) })
+}
+
+
+extension StoryIDs {
+    
+    func addStoryIDs(storyIDs: [Int], with type: SourceType) {
+        let arrayIDs = storyIDs.map { EntityID.getOrCreateSingle(id: $0) }
         
         switch type {
         case .newstories:
-            new = arrayIDs as NSSet
-//            addToNew(arrayIDs as NSSet)
+            new = arrayIDs
         case .topstories:
-            top = arrayIDs as NSSet
-//            addToTop(arrayIDs as NSSet)
+            top = arrayIDs
         case .beststories:
-            best = arrayIDs as NSSet
-//            addToBest(arrayIDs as NSSet)
+            best = arrayIDs
         default:
             return
         }
         NewsDAL.shared.saveContext()
     }
     
-    func getStoryIDs(with type: SourceType) -> Set<EntityID>? {
+    func getStoryIDs(with type: SourceType) -> [EntityID]? {
         switch type {
         case .newstories:
-            return new as? Set<EntityID>
+            return new
         case .topstories:
-            return top as? Set<EntityID>
+            return top
         case .beststories:
-            return best as? Set<EntityID>
+            return best
         default:
             return nil
         }

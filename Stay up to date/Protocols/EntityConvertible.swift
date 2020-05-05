@@ -11,7 +11,7 @@ import Foundation
 
 protocol EntityConvertible {
     
-    associatedtype Entity
+    associatedtype Entity: ManagedObjectConvertible
     
     /// Creates an Entity from the current NSManagedObject.
     func toEntity() -> Entity

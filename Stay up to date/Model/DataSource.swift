@@ -9,15 +9,15 @@
 import UIKit
 
 
-final class DataSource<T: Decodable, P: BaseTableViewCell>: NSObject, UITableViewDataSource, UITableViewDataSourcePrefetching {
+final class DataSource<Entity: Decodable & ManagedObjectConvertible, Existing: ManagedObjectExistable, P: BaseTableViewCell>: NSObject, UITableViewDataSource, UITableViewDataSourcePrefetching {
     
-    var objects = [T?]()
+//    var objects = [T?]()
     
     private weak var fetchDelegate: Fetchable?
     private weak var alertDelegate: AlertDelegate?
 
-    init(objects: [T?], fetchDelegate: Fetchable, alertDelegate: AlertDelegate) {
-        self.objects = objects
+    init(fetchDelegate: Fetchable, alertDelegate: AlertDelegate) {
+//        self.objects = objects
         self.fetchDelegate = fetchDelegate
         self.alertDelegate = alertDelegate
     }
@@ -26,13 +26,21 @@ final class DataSource<T: Decodable, P: BaseTableViewCell>: NSObject, UITableVie
     // MARK: - UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return objects.count
+        return NewsDAL.get(EntityID.self).count
+//        return objects.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: P.identifier, for: indexPath) as? P else { return UITableViewCell() }
         
-        if let object = objects[indexPath.row] as? P.Element {
+        if
+            let objectDAO = Existing.getSingle(ordinal: Int16(indexPath.row)) as? AnyEntityConvertible<Entity>,
+            let object = objectDAO.toEntity() as? P.Element
+        {
+            
+//        }
+//        
+//        if let object = objects[indexPath.row] as? P.Element {
             cell.setupCell(with: object)
         } else {
             cell.resetCell()
@@ -51,7 +59,11 @@ final class DataSource<T: Decodable, P: BaseTableViewCell>: NSObject, UITableVie
     
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         for indexPath in indexPaths {
-            if let _ = objects[indexPath.row] as? P.Element { continue }
+            if
+                let objectDAO = Existing.getSingle(ordinal: Int16(indexPath.row)) as? AnyEntityConvertible<Entity>,
+                let _ = objectDAO.toEntity() as? P.Element
+            { continue }
+//            if let _ = objects[indexPath.row] as? P.Element { continue }
             fetchDelegate?.executeFetch(by: indexPath.row) { [alertDelegate] error in
                 if let error = error, !error.localizedDescription.contains("cancelled") {
                     alertDelegate?.didReceive(error: error)

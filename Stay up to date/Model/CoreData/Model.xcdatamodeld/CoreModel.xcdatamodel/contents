@@ -6,6 +6,7 @@
     </entity>
     <entity name="StoryDAO" representedClassName="StoryDAO" syncable="YES">
         <attribute name="author" optional="YES" attributeType="String"/>
+        <attribute name="ordinal" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="time" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="url" optional="YES" attributeType="URI"/>
@@ -18,7 +19,7 @@
     </entity>
     <elements>
         <element name="EntityID" positionX="-54" positionY="9" width="128" height="73"/>
-        <element name="StoryDAO" positionX="247.9921875" positionY="132.3984375" width="128" height="118"/>
+        <element name="StoryDAO" positionX="247.9921875" positionY="132.3984375" width="128" height="133"/>
         <element name="StoryIDs" positionX="403.7109375" positionY="23.9921875" width="128" height="88"/>
     </elements>
 </model>
