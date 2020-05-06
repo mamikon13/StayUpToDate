@@ -9,7 +9,7 @@
 import UIKit
 
 
-final class DataSource<Entity: Decodable & ManagedObjectConvertible, Existing: ManagedObjectExistable, P: BaseTableViewCell>: NSObject, UITableViewDataSource, UITableViewDataSourcePrefetching {
+final class DataSource<Entity: Decodable, Existing: ManagedObjectExistable & EntityConvertible, P: BaseTableViewCell>: NSObject, UITableViewDataSource, UITableViewDataSourcePrefetching {
     
 //    var objects = [T?]()
     
@@ -34,12 +34,9 @@ final class DataSource<Entity: Decodable & ManagedObjectConvertible, Existing: M
         guard let cell = tableView.dequeueReusableCell(withIdentifier: P.identifier, for: indexPath) as? P else { return UITableViewCell() }
         
         if
-            let objectDAO = Existing.getSingle(ordinal: Int16(indexPath.row)) as? AnyEntityConvertible<Entity>,
+            let objectDAO = Existing.getSingle(ordinal: Int16(indexPath.row)) as? Existing,
             let object = objectDAO.toEntity() as? P.Element
         {
-            
-//        }
-//        
 //        if let object = objects[indexPath.row] as? P.Element {
             cell.setupCell(with: object)
         } else {
@@ -60,7 +57,8 @@ final class DataSource<Entity: Decodable & ManagedObjectConvertible, Existing: M
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         for indexPath in indexPaths {
             if
-                let objectDAO = Existing.getSingle(ordinal: Int16(indexPath.row)) as? AnyEntityConvertible<Entity>,
+//                let objectDAO: Existing = Existing.getSingle(ordinal: Int16(indexPath.row)),
+                let objectDAO = Existing.getSingle(ordinal: Int16(indexPath.row)) as? Existing,
                 let _ = objectDAO.toEntity() as? P.Element
             { continue }
 //            if let _ = objects[indexPath.row] as? P.Element { continue }

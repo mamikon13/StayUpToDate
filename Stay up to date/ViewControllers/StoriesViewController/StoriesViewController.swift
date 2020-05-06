@@ -235,11 +235,15 @@ extension StoriesViewController: Fetchable {
             
 //            self.dataSource.objects[index] = story
             
-            let storyDAO = story.toManagedObject()
-            storyDAO.ordinal = Int16(index)
-            NewsDAL.shared.saveContext()
+//            let storyDAO = story.toManagedObject()
+//            storyDAO.ordinal = Int16(index)
+//            NewsDAL.shared.saveContext()
             
             DispatchQueue.main.async {
+                let storyDAO = story.toManagedObject()
+                storyDAO.ordinal = Int16(index)
+                NewsDAL.shared.saveContext()
+                
                 let indexPath = IndexPath(row: index, section: 0)
                 if self.tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
                     self.tableView.reloadRows(at: [indexPath], with: .fade)

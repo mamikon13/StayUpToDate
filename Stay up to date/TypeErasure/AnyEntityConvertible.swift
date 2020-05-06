@@ -46,3 +46,18 @@ private class _ConvertibleBox<Base: EntityConvertible>: _AnyConvertibleBox<Base.
     }
     
 }
+
+
+//struct AnyEntityConvertible<Entity: ManagedObjectConvertible>: EntityConvertible {
+//
+//    private let _result: Entity
+//
+//    init<MapperType: EntityConvertible>(_ mapper: MapperType) where MapperType.Entity == Entity {
+//        _result = mapper.toEntity()
+//    }
+//
+//    func toEntity() -> Entity {
+//        return _result
+//    }
+//
+//}
