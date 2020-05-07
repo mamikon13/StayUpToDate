@@ -22,6 +22,5 @@ extension StoryDAO {
     @NSManaged public var time: Date?
     @NSManaged public var title: String?
     @NSManaged public var url: URL?
-    @NSManaged public var ordinal: Int16
     
 }

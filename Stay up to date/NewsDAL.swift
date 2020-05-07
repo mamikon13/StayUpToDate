@@ -30,11 +30,8 @@ final class NewsDAL {
         let semaphore = DispatchSemaphore(value: 0)
 
         DispatchQueue.global().async {
-            self.shared.backgroundContext.performAndWait {
+            self.shared.currentContext.performAndWait {
                 do {
-                    if ttype.description() == "StoryDAO" {
-//                        fatalError()
-                    }
                     let fetchRequest: NSFetchRequest<T> = NSFetchRequest<T>(entityName: ttype.description())
                     result = try self.shared.currentContext.fetch(fetchRequest)
                 } catch {

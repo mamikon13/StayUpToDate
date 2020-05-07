@@ -47,7 +47,6 @@ struct Story {
     let author: String?
     let time: Date?
     let url: URL?
-    var ordinal: Int16?
 
     private(set) var type: StoryType?
     private var storyType: String? {
@@ -56,14 +55,13 @@ struct Story {
         }
     }
     
-    public init(id: Int, title: String?, author: String?, time: Date?, url: URL?, storyType: String? = nil, ordinal: Int16? = nil) {
+    public init(id: Int, title: String?, author: String?, time: Date?, url: URL?, storyType: String? = nil) {
         self.id = id
         self.title = title
         self.author = author
         self.time = time
         self.url = url
         self.storyType = storyType
-        self.ordinal = ordinal
     }
 
 }
@@ -91,7 +89,6 @@ extension Story: ManagedObjectConvertible {
         storyDAO.author = author
         storyDAO.time = time
         storyDAO.url = url
-        storyDAO.ordinal = ordinal ?? 0
         
         return storyDAO
     }

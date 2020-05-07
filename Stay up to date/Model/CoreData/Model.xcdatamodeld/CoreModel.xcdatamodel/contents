@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19D76" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="EntityID" representedClassName="EntityID" syncable="YES">
         <attribute name="selfID" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" customClassName="Int"/>
         <relationship name="storyDAO" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="StoryDAO" inverseName="id" inverseEntity="StoryDAO"/>
     </entity>
     <entity name="StoryDAO" representedClassName="StoryDAO" syncable="YES">
         <attribute name="author" optional="YES" attributeType="String"/>
-        <attribute name="ordinal" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="time" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="url" optional="YES" attributeType="URI"/>
@@ -19,7 +18,7 @@
     </entity>
     <elements>
         <element name="EntityID" positionX="-54" positionY="9" width="128" height="73"/>
-        <element name="StoryDAO" positionX="247.9921875" positionY="132.3984375" width="128" height="133"/>
+        <element name="StoryDAO" positionX="247.9921875" positionY="132.3984375" width="128" height="118"/>
         <element name="StoryIDs" positionX="403.7109375" positionY="23.9921875" width="128" height="88"/>
     </elements>
 </model>

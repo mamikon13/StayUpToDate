@@ -24,9 +24,6 @@ protocol ManagedObjectExistable: NSManagedObject {
     /// Gets a NSManagedObject from the CoreData if it exists in the store by given id.
     static func getSingle(id: Int) -> ManagedObject?
     
-    /// Gets a NSManagedObject from the CoreData if it exists in the store by given ordinal.
-    static func getSingle(ordinal: Int16) -> ManagedObject?
-    
 }
 
 
@@ -47,24 +44,14 @@ extension ManagedObjectExistable {
         return nil
     }
     
-    /// Gets a NSManagedObject from the CoreData if it exists in the store by given ordinal.
-    static func getSingle(ordinal: Int16) -> ManagedObject? {
-        return nil
-    }
-    
 }
 
 
 extension ManagedObjectExistable where ManagedObject: EntityConvertible {
     
-    /// Gets a NSManagedObject that conforms to EntityConvertible from the CoreData if it exists in the store by given ordinal.
-    static func getSingle(ordinal: Int16) -> ManagedObject? {
+    /// Gets a NSManagedObject that conforms to EntityConvertible from the CoreData if it exists in the store by given id.
+    static func getSingle(id: Int) -> ManagedObject? {
         return nil
     }
-        
-        /// Gets a NSManagedObject that conforms to EntityConvertible from the CoreData if it exists in the store by given ordinal.
-    //    static func getSingle<T>(ordinal: Int16) -> T? where T: EntityConvertible {
-    //        return nil
-    //    }
     
 }

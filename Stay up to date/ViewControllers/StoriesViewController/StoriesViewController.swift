@@ -27,6 +27,7 @@ final class StoriesViewController: UIViewController, BaseViewController {
     @IBOutlet private weak var segmentedControl: UISegmentedControl!
     
     @IBAction private func segmentedControlValueChanged(_ sender: UISegmentedControl) {
+        NewsDAL.shared.currentContext.rollback()
         reloadStoryIDs(by: sender.selectedSegmentIndex)
     }
     
@@ -72,18 +73,13 @@ private extension StoriesViewController {
         
         NewsAPI.shared.storyIDs(from: type) { [weak self] ids, error in
             guard let self = self else { return }
-            let databaseIDs = StoryIDs.getOrCreateSingle()
-            guard
-                let serverIDs = ids
-//                let currentIDs = databaseIDs.getStoryIDs(with: type),
-//                currentIDs.count == 0 || serverIDs.first != currentIDs.first?.selfID
-//                self.currentIDs.count == 0 || serverIDs.first != self.currentIDs.first
-                else {
-                    self.stopRefreshingUI()
-                    self.didReceive(error: error)
-                    return
+            guard let serverIDs = ids else {
+                self.stopRefreshingUI()
+                self.didReceive(error: error)
+                return
             }
             
+            let databaseIDs = StoryIDs.getOrCreateSingle()
             databaseIDs.addStoryIDs(storyIDs: serverIDs, with: type)
             
             DispatchQueue.main.async {
@@ -92,7 +88,7 @@ private extension StoriesViewController {
                 self.dataTasks = []
                 
                 if let _ = self.dataSource {
-//                    dataSource.objects = [Story?](repeating: nil, count: serverIDs.count)
+                    self.dataSource.currentIDs = self.currentIDs
                     self.tableView.reloadData()
                 } else {
                     self.setupTableView()
@@ -103,7 +99,7 @@ private extension StoriesViewController {
     }
     
     func setupTableView() {
-        dataSource = .init(/* objects: [Story?](repeating: nil, count: currentIDs.count), */ fetchDelegate: self, alertDelegate: self)
+        dataSource = .init(ids: currentIDs, fetchDelegate: self, alertDelegate: self)
         tableView.register(StoryTableViewCell.nib, forCellReuseIdentifier: StoryTableViewCell.identifier)
         
         tableView.rowHeight = UITableView.automaticDimension
@@ -158,7 +154,7 @@ private extension StoriesViewController {
     }
     
     func showWarningAlert(for indexPath: IndexPath) {
-        let message = StoryDAO.getSingle(ordinal: Int16(indexPath.row)) != nil ? "Invalid URL" : "The object hasn't been loaded yet"
+        let message = StoryDAO.getSingle(id: currentIDs[indexPath.row]) != nil ? "Invalid URL" : "The object hasn't been loaded yet"
         
         let alert = UIAlertController(title: "Ooops!", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
@@ -200,7 +196,7 @@ extension StoriesViewController: AlertDelegate {
 extension StoriesViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let url = StoryDAO.getSingle(ordinal: Int16(indexPath.row))?.toEntity().url else {
+        guard let url = StoryDAO.getSingle(id: currentIDs[indexPath.row])?.toEntity().url else {
             showWarningAlert(for: indexPath)
             tableView.deselectRow(at: indexPath, animated: true)
             return
@@ -233,15 +229,11 @@ extension StoriesViewController: Fetchable {
                 let story = story
                 else { return }
             
-//            self.dataSource.objects[index] = story
-            
 //            let storyDAO = story.toManagedObject()
-//            storyDAO.ordinal = Int16(index)
 //            NewsDAL.shared.saveContext()
             
             DispatchQueue.main.async {
-                let storyDAO = story.toManagedObject()
-                storyDAO.ordinal = Int16(index)
+                _ = story.toManagedObject()
                 NewsDAL.shared.saveContext()
                 
                 let indexPath = IndexPath(row: index, section: 0)
