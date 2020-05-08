@@ -28,7 +28,9 @@ extension StoryDAO: ManagedObjectExistable {
     }
     
     class func getSingle(id: Int) -> StoryDAO? {
-        return NewsDAL.get(self).first(where: { $0.id.selfID == id })
+        return NewsDAL.get(self).first(where: {
+            $0.id.selfID == id
+        })
     }
     
 }

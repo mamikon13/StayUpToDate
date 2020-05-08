@@ -27,7 +27,7 @@ final class StoriesViewController: UIViewController, BaseViewController {
     @IBOutlet private weak var segmentedControl: UISegmentedControl!
     
     @IBAction private func segmentedControlValueChanged(_ sender: UISegmentedControl) {
-        NewsDAL.shared.currentContext.rollback()
+//        NewsDAL.shared.currentContext.rollback()
         reloadStoryIDs(by: sender.selectedSegmentIndex)
     }
     
@@ -229,7 +229,7 @@ extension StoriesViewController: Fetchable {
                 let story = story
                 else { return }
             
-//            let storyDAO = story.toManagedObject()
+//            _ = story.toManagedObject()
 //            NewsDAL.shared.saveContext()
             
             DispatchQueue.main.async {
