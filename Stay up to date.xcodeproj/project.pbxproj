@@ -87,7 +87,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C735531824538B03006EF736 /* CoreData */ = {
+		C735531824538B03006EF736 /* CoreData Entities */ = {
 			isa = PBXGroup;
 			children = (
 				C739894A244F76EE00794617 /* Model.xcdatamodeld */,
@@ -98,7 +98,7 @@
 				C735531F24538FE9006EF736 /* StoryIDs+CoreDataClass.swift */,
 				C735532024538FE9006EF736 /* StoryIDs+CoreDataProperties.swift */,
 			);
-			path = CoreData;
+			path = "CoreData Entities";
 			sourceTree = "<group>";
 		};
 		C743B50A2461AF4B005E3250 /* TypeErasure */ = {
@@ -190,7 +190,7 @@
 			children = (
 				C7D567EA244097DD00423D59 /* DataSource.swift */,
 				C7D567DC2440973300423D59 /* Entities */,
-				C735531824538B03006EF736 /* CoreData */,
+				C735531824538B03006EF736 /* CoreData Entities */,
 			);
 			path = Model;
 			sourceTree = "<group>";
