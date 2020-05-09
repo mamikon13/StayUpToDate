@@ -11,6 +11,9 @@ import Foundation
 
 protocol AlertDelegate: class {
     
-    /// Captures an Errror by the given error.
+    /// Captures an Error.
+    ///
+    /// - Parameters:
+    ///   - error: The captured error.
     func didReceive(error: Error?)
 }

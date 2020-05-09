@@ -27,7 +27,6 @@ final class StoriesViewController: UIViewController, BaseViewController {
     @IBOutlet private weak var segmentedControl: UISegmentedControl!
     
     @IBAction private func segmentedControlValueChanged(_ sender: UISegmentedControl) {
-//        NewsDAL.shared.currentContext.rollback()
         reloadStoryIDs(by: sender.selectedSegmentIndex)
     }
     
@@ -37,7 +36,7 @@ final class StoriesViewController: UIViewController, BaseViewController {
     
     private var currentIDs = [Int]()
     
-    // store task (calling API) of getting each story
+    // store tasks (calling API) of getting each story
     private var dataTasks = [URLSessionDataTask]()
     
     // MARK: - View Controller Life Cycle
@@ -80,7 +79,7 @@ private extension StoriesViewController {
             }
             
             let databaseIDs = StoryIDs.getOrCreateSingle()
-            databaseIDs.addStoryIDs(storyIDs: serverIDs, with: type)
+            databaseIDs.add(storyIDs: serverIDs, with: type)
             
             DispatchQueue.main.async {
                 self.currentIDs = serverIDs
@@ -220,7 +219,12 @@ extension StoriesViewController: Fetchable {
         
         // if there is already an existing data task for that specific story url,
         // it means we already loaded it previously / currently loading it and we have to stop it
-        guard !dataTasks.contains(where: { $0.originalRequest?.url == Request(type: .story(storyID)).absolutURL }) else { return }
+        if let task = dataTasks.first(where: { $0.originalRequest?.url == Request(type: .story(storyID)).absolutURL }) {
+            if task.state == .canceling {
+                task.resume()
+            }
+            return
+        }
         
         let dataTask: URLSessionDataTask = NewsAPI.shared.story(id: storyID) { [weak self] story, error in
             handler(error)
@@ -229,13 +233,9 @@ extension StoriesViewController: Fetchable {
                 let story = story
                 else { return }
             
-//            _ = story.toManagedObject()
-//            NewsDAL.shared.saveContext()
+            _ = story.toManagedObject()
             
             DispatchQueue.main.async {
-                _ = story.toManagedObject()
-                NewsDAL.shared.saveContext()
-                
                 let indexPath = IndexPath(row: index, section: 0)
                 if self.tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false {
                     self.tableView.reloadRows(at: [indexPath], with: .fade)

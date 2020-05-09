@@ -12,28 +12,29 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    
+
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        print("*************", NewsDAL.shared.persistentContainer.persistentStoreDescriptions)
-        
         guard #available(iOS 13.0, *) else {
-            let vc = StoriesViewController()
-            let navigationController = UINavigationController(rootViewController: vc)
             window = UIWindow(frame: UIScreen.main.bounds)
-            window?.rootViewController = navigationController
-            window?.makeKeyAndVisible()
-            
+            LaunchManager.setupInitialViewController(for: window)
             return true
         }
-        
         return true
     }
-    
+
     func applicationWillTerminate(_ application: UIApplication) {
         NewsDAL.shared.saveContext()
     }
-    
+
+    func applicationWillResignActive(_ application: UIApplication) {
+        NewsDAL.shared.saveContext()
+    }
+
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        NewsDAL.shared.saveContext()
+    }
+
 }
 

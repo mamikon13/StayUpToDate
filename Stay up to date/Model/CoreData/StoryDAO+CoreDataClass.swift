@@ -17,7 +17,8 @@ public class StoryDAO: NSManagedObject { }
 extension StoryDAO: ManagedObjectExistable {
     
     class func getOrCreateSingle(id: Int) -> StoryDAO {
-        if let item = NewsDAL.get(self).first(where: { $0.id.selfID == id }) {
+        let format = "id.selfID = \(id)"
+        if let item = NewsDAL.get(self, with: format).first {
             return item
         }
         
@@ -28,9 +29,8 @@ extension StoryDAO: ManagedObjectExistable {
     }
     
     class func getSingle(id: Int) -> StoryDAO? {
-        return NewsDAL.get(self).first(where: {
-            $0.id.selfID == id
-        })
+        let format = "id.selfID = \(id)"
+        return NewsDAL.get(self, with: format).first
     }
     
 }

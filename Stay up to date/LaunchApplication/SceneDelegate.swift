@@ -19,11 +19,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        
-        let vc = StoriesViewController()
-        let navVC = UINavigationController(rootViewController: vc)
-        window?.rootViewController = navVC
-        window?.makeKeyAndVisible()
+        LaunchManager.setupInitialViewController(for: window)
     }
-    
+
+    func sceneDidDisconnect(_ scene: UIScene) {
+        NewsDAL.shared.saveContext()
+    }
+
+    func sceneWillResignActive(_ scene: UIScene) {
+        NewsDAL.shared.saveContext()
+    }
+
+    func sceneDidEnterBackground(_ scene: UIScene) {
+        NewsDAL.shared.saveContext()
+    }
+
 }

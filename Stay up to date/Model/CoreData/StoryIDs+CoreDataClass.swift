@@ -30,7 +30,12 @@ extension StoryIDs: ManagedObjectExistable {
 
 extension StoryIDs {
     
-    func addStoryIDs(storyIDs: [Int], with type: SourceType) {
+    /// Adds array of story'es IDs of SourceType type to current object.
+    ///
+    /// - Parameters:
+    ///   - storyIDs: The added array of story'es IDs.
+    ///   - type: The type of stories.
+    func add(storyIDs: [Int], with type: SourceType) {
         let arrayIDs = storyIDs.map { EntityID.getOrCreateSingle(id: $0) }
         
         switch type {
@@ -43,20 +48,8 @@ extension StoryIDs {
         default:
             return
         }
+        
         NewsDAL.shared.saveContext()
-    }
-    
-    func getStoryIDs(with type: SourceType) -> [EntityID]? {
-        switch type {
-        case .newstories:
-            return new
-        case .topstories:
-            return top
-        case .beststories:
-            return best
-        default:
-            return nil
-        }
     }
 
 }

@@ -60,18 +60,33 @@ final class NewsAPI {
 
 extension NewsAPI {
     
+    /// Captures a story'es IDs by the given SourceType
+    ///
+    /// - Parameters:
+    ///   - sourceType: The type of receiving story'es IDs.
+    ///   - callback: Captures an array of story'es IDs or error if it was caught.
     func storyIDs(from sourceType: SourceType, callback: @escaping ApiCallback<[Int]>) {
         _ = fetch(for: Request(type: sourceType)) { storyIDs, error in
             callback(storyIDs, error)
         }
     }
     
+    /// Returns a data task for fetching story by the given id and captures a story
+    ///
+    /// - Parameters:
+    ///   - id: id of the received story.
+    ///   - callback: Captures a story by the given id or error if it was caught.
     func story(id: Int, callback: @escaping ApiCallback<Story>) -> URLSessionDataTask {
         fetch(for: Request(type: .story(id))) { story, error in
             callback(story, error)
         }
     }
     
+    /// Captures an array of prepared stories by the given SourceType
+    ///
+    /// - Parameters:
+    ///   - sourceType: The type of receiving stories.
+    ///   - callback: Captures an array of stories or error if it was caught.
     func stories(from sourceType: SourceType, callback: @escaping ApiCallback<[Story]>) {
         storyIDs(from: sourceType) { storyIDs, error in
             guard let ids = storyIDs else {

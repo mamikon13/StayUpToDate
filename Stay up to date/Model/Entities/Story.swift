@@ -90,6 +90,8 @@ extension Story: ManagedObjectConvertible {
         storyDAO.time = time
         storyDAO.url = url
         
+        NewsDAL.shared.saveContext()
+        
         return storyDAO
     }
 

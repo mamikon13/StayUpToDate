@@ -18,6 +18,9 @@ protocol BaseTableViewCell: UITableViewCell {
     static var identifier: String { get }
     
     /// Setups a cell by the given object.
+    ///
+    /// - Parameters:
+    ///   - object: The object the cell will setup with.
     func setupCell(with object: Element)
     
     /// Resets a cell.

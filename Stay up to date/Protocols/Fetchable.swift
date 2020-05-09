@@ -15,6 +15,10 @@ typealias Fetchable = FetchExecutable & FetchCancellable
 protocol FetchExecutable: class {
     
     /// Executes a fetch by the given index.
+    ///
+    /// - Parameters:
+    ///   - index: The current index the fetch will execute with.
+    ///   - handler: The handler for error. In this closure you can capture an error.
     func executeFetch(by index: Int, handler: @escaping (Error?) -> ())
 
 }
@@ -23,6 +27,9 @@ protocol FetchExecutable: class {
 protocol FetchCancellable: class {
     
     /// Cancels a fetch by the given index.
+    ///
+    /// - Parameters:
+    ///   - index: The current index the fetch will cancel with.
     func cancelFetch(by index: Int)
 
 }

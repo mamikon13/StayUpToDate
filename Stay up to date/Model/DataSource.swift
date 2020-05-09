@@ -33,7 +33,7 @@ final class DataSource<Entity: Decodable, Existing: ManagedObjectExistable & Ent
         guard let cell = tableView.dequeueReusableCell(withIdentifier: P.identifier, for: indexPath) as? P else { return UITableViewCell() }
         
         if
-            let objectDAO = Existing.getSingle(id: currentIDs[indexPath.row]) as? Existing,
+            let objectDAO = Existing.getSingle(id: currentIDs[indexPath.row]) as? Existing, // TODO: try Type Erasure if you can
             let object = objectDAO.toEntity() as? P.Element
         {
             cell.setupCell(with: object)

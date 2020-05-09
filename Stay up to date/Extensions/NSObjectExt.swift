@@ -11,6 +11,7 @@ import Foundation
 
 extension NSObject {
     
+    /// Returns a class name string.
     class func description() -> String {
         return String(describing: self)
     }

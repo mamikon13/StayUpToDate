@@ -35,6 +35,7 @@
 		C743B50C2461AFB2005E3250 /* AnyEntityConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = C743B50B2461AFB2005E3250 /* AnyEntityConvertible.swift */; };
 		C746786B244093C100ABEDDD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C746786A244093C100ABEDDD /* Assets.xcassets */; };
 		C746786E244093C100ABEDDD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C746786C244093C100ABEDDD /* LaunchScreen.storyboard */; };
+		C7B7F9E624670E360009081E /* LaunchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B7F9E524670E350009081E /* LaunchManager.swift */; };
 		C7D567E4244097C800423D59 /* StoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7D567E2244097C800423D59 /* StoryTableViewCell.xib */; };
 		C7D567E8244097D200423D59 /* StoriesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7D567E6244097D200423D59 /* StoriesViewController.xib */; };
 /* End PBXBuildFile section */
@@ -61,6 +62,7 @@
 		C746786F244093C100ABEDDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C78DCC1D2440960400631EB1 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		C78DCC1E2440960400631EB1 /* NewsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsAPI.swift; sourceTree = "<group>"; };
+		C7B7F9E524670E350009081E /* LaunchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchManager.swift; sourceTree = "<group>"; };
 		C7D567E2244097C800423D59 /* StoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoryTableViewCell.xib; sourceTree = "<group>"; };
 		C7D567E3244097C800423D59 /* StoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryTableViewCell.swift; sourceTree = "<group>"; };
 		C7D567E6244097D200423D59 /* StoriesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoriesViewController.xib; sourceTree = "<group>"; };
@@ -129,8 +131,7 @@
 				C746786C244093C100ABEDDD /* LaunchScreen.storyboard */,
 				C746786F244093C100ABEDDD /* Info.plist */,
 				C746786A244093C100ABEDDD /* Assets.xcassets */,
-				C7467861244093BD00ABEDDD /* AppDelegate.swift */,
-				C7467863244093BD00ABEDDD /* SceneDelegate.swift */,
+				C7B7F9E7246711920009081E /* LaunchApplication */,
 				C78DCC1E2440960400631EB1 /* NewsAPI.swift */,
 				C735531924538B4A006EF736 /* NewsDAL.swift */,
 				C78DCC1D2440960400631EB1 /* Request.swift */,
@@ -143,19 +144,21 @@
 			path = "Stay up to date";
 			sourceTree = "<group>";
 		};
-		C750148D24563D8300607C9C /* Base */ = {
+		C7B7F9E7246711920009081E /* LaunchApplication */ = {
 			isa = PBXGroup;
 			children = (
-				C7D567F62440980D00423D59 /* StringExt.swift */,
-				C73553292454F718006EF736 /* NSObjectExt.swift */,
+				C7467861244093BD00ABEDDD /* AppDelegate.swift */,
+				C7467863244093BD00ABEDDD /* SceneDelegate.swift */,
+				C7B7F9E524670E350009081E /* LaunchManager.swift */,
 			);
-			path = Base;
+			path = LaunchApplication;
 			sourceTree = "<group>";
 		};
 		C7D567DB2440972000423D59 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				C750148D24563D8300607C9C /* Base */,
+				C7D567F62440980D00423D59 /* StringExt.swift */,
+				C73553292454F718006EF736 /* NSObjectExt.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				C743B50C2461AFB2005E3250 /* AnyEntityConvertible.swift in Sources */,
 				C743B4FE245F3B28005E3250 /* StoryIDs+CoreDataClass.swift in Sources */,
 				C743B4FA245F3B28005E3250 /* StoryDAO+CoreDataClass.swift in Sources */,
+				C7B7F9E624670E360009081E /* LaunchManager.swift in Sources */,
 				C743B4FB245F3B28005E3250 /* StoryDAO+CoreDataProperties.swift in Sources */,
 				C743B5092461754D005E3250 /* ManagedObjectExistable.swift in Sources */,
 				C743B4F4245F3959005E3250 /* StringExt.swift in Sources */,

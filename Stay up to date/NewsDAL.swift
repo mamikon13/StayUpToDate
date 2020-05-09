@@ -21,32 +21,40 @@ final class NewsDAL {
     
     // MARK: internal stuff
 
-    /// All objects of given type in DataBase
+    /// All objects by the given type in DataBase
     ///
     /// - Parameters:
     ///   - ttype: The type of receiving objects.
-    static func get<T: NSManagedObject>(_ ttype: T.Type) -> [T] {
+    ///   - NSPredicateFormat: The format string of optional NSPredicate.
+    static func get<T: NSManagedObject>(_ ttype: T.Type, with NSPredicateFormat: String? = nil) -> [T] {
         var result = [T]()
         let semaphore = DispatchSemaphore(value: 0)
 
         DispatchQueue.global().async {
-            self.shared.currentContext.performAndWait {
+            self.shared.backgroundContext.performAndWait {
+                
+                let fetchRequest: NSFetchRequest<T> = NSFetchRequest<T>(entityName: ttype.description())
+                fetchRequest.predicate = NSPredicateFormat != nil ? NSPredicate(format: NSPredicateFormat!) : nil
+                
                 do {
-                    let fetchRequest: NSFetchRequest<T> = NSFetchRequest<T>(entityName: ttype.description())
-                    result = try self.shared.currentContext.fetch(fetchRequest)
+                    result = try self.shared.backgroundContext.fetch(fetchRequest)
                 } catch {
                     fatalError("Fetch task failed")
                 }
             }
             semaphore.signal()
         }
-//
+        
         _ = semaphore.wait(wallTimeout: .distantFuture)
         return result
     }
-
+    
+    /// Creates NSManagedObject of the given type
+    ///
+    /// - Parameters:
+    ///   - ttype: The type of creating object.
     func createManaged<T: NSManagedObject>(_ ttype: T.Type) -> T {
-        return T(context: currentContext)
+        return T(context: backgroundContext)
     }
     
     
@@ -55,22 +63,8 @@ final class NewsDAL {
     private lazy var backgroundContext: NSManagedObjectContext = {
         return persistentContainer.newBackgroundContext()
     }()
-
-    private lazy var context: NSManagedObjectContext = {
-        return persistentContainer.viewContext
-    }()
-
-    lazy var currentContext = {
-        return Thread.current.isMainThread ? context : backgroundContext
-    }()
     
-    lazy var persistentContainer: NSPersistentContainer = {
-        /*
-         The persistent container for the application. This implementation
-         creates and returns a container, having loaded the store for the
-         application to it. This property is optional since there are legitimate
-         error conditions that could cause the creation of the store to fail.
-         */
+    private lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Model")
         
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
@@ -78,7 +72,6 @@ final class NewsDAL {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
             container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-            container.viewContext.undoManager = nil
             container.viewContext.shouldDeleteInaccessibleFaults = true
             container.viewContext.automaticallyMergesChangesFromParent = true
         })
@@ -89,13 +82,11 @@ final class NewsDAL {
     
     // MARK: - Core Data Saving support
     
-    func saveContext() {
-        if currentContext.hasChanges {
+    public func saveContext() {
+        if backgroundContext.hasChanges {
             do {
-                try currentContext.save()
+                try backgroundContext.save()
             } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
