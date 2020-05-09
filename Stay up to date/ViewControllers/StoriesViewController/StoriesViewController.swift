@@ -153,7 +153,7 @@ private extension StoriesViewController {
     }
     
     func showWarningAlert(for indexPath: IndexPath) {
-        let message = StoryDAO.getSingle(id: currentIDs[indexPath.row]) != nil ? "Invalid URL" : "The object hasn't been loaded yet"
+        let message = StoryDAO.getSingle(id: currentIDs[indexPath.row]) != nil ? "Invalid URL" : "The object hasn't been loaded yet or an error occured. \n\nTry to reload table."
         
         let alert = UIAlertController(title: "Ooops!", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
@@ -219,12 +219,7 @@ extension StoriesViewController: Fetchable {
         
         // if there is already an existing data task for that specific story url,
         // it means we already loaded it previously / currently loading it and we have to stop it
-        if let task = dataTasks.first(where: { $0.originalRequest?.url == Request(type: .story(storyID)).absolutURL }) {
-            if task.state == .canceling {
-                task.resume()
-            }
-            return
-        }
+        guard !dataTasks.contains(where: { $0.originalRequest?.url == Request(type: .story(storyID)).absolutURL }) else { return }
         
         let dataTask: URLSessionDataTask = NewsAPI.shared.story(id: storyID) { [weak self] story, error in
             handler(error)

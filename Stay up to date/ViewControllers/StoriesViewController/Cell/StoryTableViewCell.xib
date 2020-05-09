@@ -38,75 +38,94 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="•••" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cfr-TE-LvP">
-                        <rect key="frame" x="16" y="93" width="80" height="34"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="34" id="Pph-sF-lLk"/>
-                            <constraint firstAttribute="width" constant="80" id="UVf-jF-oiW"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="15"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <nil key="highlightedColor"/>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                <integer key="value" value="8"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                    </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hh9-GG-Sgw" userLabel="blueLine">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hh9-GG-Sgw" userLabel="blueLine" customClass="RoundedCornerView" customModule="StayUpToDate" customModuleProvider="target">
                         <rect key="frame" x="288.5" y="128" width="15.5" height="2"/>
-                        <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="2" id="Wrh-fD-cCd"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                <integer key="value" value="1"/>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="fillColor">
+                                <color key="value" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aA6-zR-2q4" userLabel="lightBlueLine">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aA6-zR-2q4" userLabel="lightBlueLine" customClass="RoundedCornerView" customModule="StayUpToDate" customModuleProvider="target">
                         <rect key="frame" x="244.5" y="107" width="59.5" height="2"/>
-                        <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="2" id="I0x-Pa-JoG"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                <integer key="value" value="1"/>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="fillColor">
+                                <color key="value" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="•••" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YmC-9p-5oz" userLabel="shortURL">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="•••" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YmC-9p-5oz" userLabel="shortURL">
                         <rect key="frame" x="288.5" y="113" width="15.5" height="14"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7iN-hH-8sC" customClass="RoundedCornerView" customModule="StayUpToDate" customModuleProvider="target">
+                        <rect key="frame" x="16" y="93" width="80" height="34"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="•••" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cfr-TE-LvP">
+                                <rect key="frame" x="8" y="0.0" width="64" height="34"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="34" id="FHU-at-QQ9"/>
+                            <constraint firstItem="cfr-TE-LvP" firstAttribute="leading" secondItem="7iN-hH-8sC" secondAttribute="leading" constant="8" id="RDl-Kx-ZaS"/>
+                            <constraint firstItem="cfr-TE-LvP" firstAttribute="top" secondItem="7iN-hH-8sC" secondAttribute="top" id="XSY-Sd-9Qq"/>
+                            <constraint firstAttribute="trailing" secondItem="cfr-TE-LvP" secondAttribute="trailing" constant="8" id="fVJ-Xj-2nJ"/>
+                            <constraint firstAttribute="bottom" secondItem="cfr-TE-LvP" secondAttribute="bottom" id="oJf-to-QFb"/>
+                            <constraint firstAttribute="width" constant="80" id="ogt-bG-SJy"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="fillColor">
+                                <color key="value" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="8"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                 <constraints>
+                    <constraint firstAttribute="bottom" secondItem="7iN-hH-8sC" secondAttribute="bottom" constant="16" id="042-pC-oO8"/>
                     <constraint firstItem="aA6-zR-2q4" firstAttribute="leading" secondItem="uug-T5-M4Z" secondAttribute="leading" id="2q4-wZ-mpf"/>
+                    <constraint firstItem="7iN-hH-8sC" firstAttribute="leading" secondItem="dsp-du-NTJ" secondAttribute="leading" id="2qP-Hh-Yhn"/>
                     <constraint firstItem="RrD-j3-OHo" firstAttribute="top" secondItem="uug-T5-M4Z" secondAttribute="top" id="4an-dA-WBL"/>
-                    <constraint firstItem="uug-T5-M4Z" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="cfr-TE-LvP" secondAttribute="trailing" constant="35" id="Bnn-Hf-sLA"/>
                     <constraint firstAttribute="trailing" secondItem="YmC-9p-5oz" secondAttribute="trailing" constant="16" id="KPs-mg-QQd"/>
+                    <constraint firstItem="YmC-9p-5oz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7iN-hH-8sC" secondAttribute="trailing" constant="20" id="KwY-iI-mPO"/>
                     <constraint firstAttribute="trailing" secondItem="dsp-du-NTJ" secondAttribute="trailing" constant="16" id="LIx-F6-4qf"/>
                     <constraint firstItem="uug-T5-M4Z" firstAttribute="top" relation="greaterThanOrEqual" secondItem="dsp-du-NTJ" secondAttribute="bottom" priority="999" constant="20" id="Liu-Lw-rSz"/>
                     <constraint firstItem="hh9-GG-Sgw" firstAttribute="leading" secondItem="YmC-9p-5oz" secondAttribute="leading" id="M00-Ai-Nj5"/>
                     <constraint firstAttribute="trailing" secondItem="uug-T5-M4Z" secondAttribute="trailing" constant="16" id="Q7O-nJ-I51"/>
-                    <constraint firstItem="cfr-TE-LvP" firstAttribute="leading" secondItem="dsp-du-NTJ" secondAttribute="leading" id="ROs-PN-vrJ"/>
+                    <constraint firstItem="7iN-hH-8sC" firstAttribute="bottom" secondItem="YmC-9p-5oz" secondAttribute="bottom" priority="999" id="Rwc-D5-ior"/>
                     <constraint firstItem="dsp-du-NTJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="T4s-mJ-gpf"/>
-                    <constraint firstAttribute="bottom" secondItem="cfr-TE-LvP" secondAttribute="bottom" constant="16" id="VSk-0s-0QV"/>
-                    <constraint firstItem="cfr-TE-LvP" firstAttribute="top" relation="greaterThanOrEqual" secondItem="dsp-du-NTJ" secondAttribute="bottom" priority="999" constant="20" id="Ys0-q6-Evp"/>
-                    <constraint firstItem="YmC-9p-5oz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="cfr-TE-LvP" secondAttribute="trailing" constant="20" id="ale-Kt-kSm"/>
                     <constraint firstItem="uug-T5-M4Z" firstAttribute="leading" secondItem="RrD-j3-OHo" secondAttribute="trailing" constant="8" id="aqZ-qf-c0m"/>
                     <constraint firstItem="hh9-GG-Sgw" firstAttribute="top" secondItem="YmC-9p-5oz" secondAttribute="bottom" constant="1" id="cXN-GR-16w"/>
                     <constraint firstItem="YmC-9p-5oz" firstAttribute="top" secondItem="uug-T5-M4Z" secondAttribute="bottom" constant="7" id="dqX-2x-B1N"/>
-                    <constraint firstItem="YmC-9p-5oz" firstAttribute="bottom" secondItem="cfr-TE-LvP" secondAttribute="bottom" priority="999" id="fud-6l-WqT"/>
+                    <constraint firstItem="7iN-hH-8sC" firstAttribute="top" relation="greaterThanOrEqual" secondItem="dsp-du-NTJ" secondAttribute="bottom" priority="999" constant="20" id="q8q-NC-UKN"/>
                     <constraint firstItem="dsp-du-NTJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="rI7-7D-rym"/>
                     <constraint firstItem="aA6-zR-2q4" firstAttribute="trailing" secondItem="uug-T5-M4Z" secondAttribute="trailing" id="rz7-Na-FI4"/>
+                    <constraint firstItem="uug-T5-M4Z" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7iN-hH-8sC" secondAttribute="trailing" constant="35" id="x0Z-FT-ZLK"/>
                     <constraint firstItem="aA6-zR-2q4" firstAttribute="top" secondItem="uug-T5-M4Z" secondAttribute="bottom" constant="1" id="y25-tj-Apd"/>
                     <constraint firstItem="hh9-GG-Sgw" firstAttribute="trailing" secondItem="YmC-9p-5oz" secondAttribute="trailing" id="y7J-CA-F2r"/>
                 </constraints>
